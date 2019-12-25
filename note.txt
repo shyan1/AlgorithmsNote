@@ -115,6 +115,25 @@ log3n 就等于 log32 * log2n，所以 O(log3n) = O(C * log2n)，其中 C=log32 
 
 队列
 
+public boolean enqueue(String item) {
+    // 
+    if (tail == n) {
+        if (head == 0) return false;
+
+        for (int i = head; i < tail; ++i) {
+            items[i-head] = items[i];
+        }
+
+        tail -= head;
+        head = 0;
+    }
+
+    items[tail] = item;
+    ++tail;
+
+    return true;
+}
+
 
 
 
@@ -123,4 +142,6 @@ log3n 就等于 log32 * log2n，所以 O(log3n) = O(C * log2n)，其中 C=log32 
 
 
 Redis 中，键的数据类型是字符串,值的数据类型有很多，常用的数据类型有这样几种，它们分别是字符串、列表、字典、集合、有序集合。
+
+
 
